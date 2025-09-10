@@ -8,6 +8,7 @@ public class VentanaSaludo {
         ventana.setSize(700,200);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
+        ventana.getContentPane().setBackground(new Color(82,171,92));
 
 
         JTextField campoTexto = new JTextField();
@@ -15,13 +16,26 @@ public class VentanaSaludo {
 
         JButton botonSaludar = new JButton("Saludar");
         botonSaludar.setBounds(270,10,200,25);
+        botonSaludar.setBackground(new Color(13,97,22));
 
         JLabel etiquetaSaludo = new JLabel("");
         etiquetaSaludo.setBounds(50,80,200,25);
 
         botonSaludar.addActionListener(e -> {
             String nombre = campoTexto.getText();
-            etiquetaSaludo.setText("Hola, " + nombre);
+            if (nombre.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Porfavor ingrese su nombre");
+            } else {
+                etiquetaSaludo.setText("Hola, " + nombre);
+            }
+        });
+
+        campoTexto.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e)  {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                    botonSaludar.doClick();
+                }
+            }
         });
         ventana.add(campoTexto);
         ventana.add(botonSaludar);
